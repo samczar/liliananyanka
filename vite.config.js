@@ -7,7 +7,8 @@ import tailwindcss from "@tailwindcss/vite";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  base: process.env.GITHUB_PAGES === "true" ? "/liliananyanka/" : "/",
+  // Custom domain serves from site root; subpath base breaks asset URLs on lilianubanekwo.com
+  base: "/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
