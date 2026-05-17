@@ -17,13 +17,13 @@ OWNER="$(gh api user -q .login)"
 REPO="liliananyanka"
 
 if ! gh repo view "$OWNER/$REPO" >/dev/null 2>&1; then
-  gh repo create "$REPO" --public --source=. --remote=origin --push
-else
-  git push -u origin main
+  gh repo create "$REPO" --public --source=. --remote=origin
 fi
 
 gh api -X POST "/repos/$OWNER/$REPO/pages" -f build_type=workflow 2>/dev/null \
   || gh api -X PUT "/repos/$OWNER/$REPO/pages" -f build_type=workflow
+
+git push -u origin main
 
 echo ""
 echo "Repository: https://github.com/$OWNER/$REPO"
